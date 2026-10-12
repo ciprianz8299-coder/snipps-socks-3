@@ -15,6 +15,10 @@ const checkoutStatus = document.querySelector('#checkout-status');
 const subscriptionForm = document.querySelector('#subscription-form');
 const subscriptionStatus = document.querySelector('#subscription-status');
 const subscriptionSubmit = document.querySelector('#subscription-submit');
+const reviewForm = document.querySelector('#review-form');
+const reviewList = document.querySelector('#review-list');
+const reviewEmpty = document.querySelector('#review-empty');
+const reviewStatus = document.querySelector('#review-status');
 const selectedPlanLabel = document.querySelector('#selected-plan-label');
 const selectedPlanPrice = document.querySelector('#selected-plan-price');
 const addButtons = document.querySelectorAll('.add-button');
@@ -351,6 +355,73 @@ subscriptionForm?.addEventListener('submit', (event) => {
 
   subscriptionStatus.hidden = false;
   subscriptionStatus.textContent = 'Planul este selectat, dar abonamentul nu a fost activat. Această pagină demo nu procesează plăți și nu trimite sau salvează date.';
+});
+
+const readReviews = () => {
+  try {
+    const reviews = JSON.parse(localStorage.getItem('snzipps-reviews') || '[]');
+    return Array.isArray(reviews) ? reviews.filter((review) =>
+      typeof review?.name === 'string' &&
+      typeof review?.comment === 'string' &&
+      Number.isInteger(review?.rating) && review.rating >= 1 && review.rating <= 5
+    ) : [];
+  } catch {
+    return [];
+  }
+};
+
+const renderReviews = () => {
+  if (!reviewList) return;
+
+  reviewList.querySelectorAll('.customer-review').forEach((card) => card.remove());
+  const reviews = readReviews();
+  if (reviewEmpty) reviewEmpty.hidden = reviews.length > 0;
+
+  reviews.forEach((review) => {
+    const card = document.createElement('article');
+    card.className = 'testimonial-card customer-review';
+
+    const stars = document.createElement('div');
+    stars.className = 'stars';
+    stars.textContent = `${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}`;
+    stars.setAttribute('aria-label', `${review.rating} din 5 stele`);
+
+    const comment = document.createElement('p');
+    comment.textContent = `„${review.comment}”`;
+
+    const author = document.createElement('strong');
+    author.textContent = `— ${review.name}`;
+
+    card.append(stars, comment, author);
+    reviewList.append(card);
+  });
+};
+
+renderReviews();
+
+reviewForm?.addEventListener('submit', (event) => {
+  event.preventDefault();
+  if (!reviewForm.reportValidity() || !reviewStatus) return;
+
+  const formData = new FormData(reviewForm);
+  const review = {
+    name: String(formData.get('name')).trim(),
+    rating: Number(formData.get('rating')),
+    comment: String(formData.get('comment')).trim(),
+  };
+  if (!review.name || !review.comment) return;
+
+  try {
+    const reviews = readReviews();
+    reviews.unshift(review);
+    localStorage.setItem('snzipps-reviews', JSON.stringify(reviews));
+    renderReviews();
+    reviewForm.reset();
+    reviewStatus.textContent = 'Recenzia a fost adăugată în acest browser.';
+  } catch {
+    reviewStatus.textContent = 'Recenzia nu a putut fi salvată în acest browser.';
+  }
+  reviewStatus.hidden = false;
 });
 
 const applyTheme = (isDark) => {

@@ -1900,6 +1900,12 @@ body.dark-mode .catalog-count strong {
   margin-bottom: 1rem;
 }
 
+body.dark-mode .process-step span {
+  background: rgba(255, 141, 111, 0.14);
+  border: 1px solid rgba(255, 141, 111, 0.3);
+  color: #ffb18a;
+}
+
 .testimonial-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   margin-bottom: 4.5rem;
@@ -1919,6 +1925,104 @@ body.dark-mode .catalog-count strong {
 
 .testimonial-card strong {
   font-size: 0.95rem;
+}
+
+.review-form {
+  margin: 0 0 5rem;
+  padding: 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--card);
+}
+
+.review-form-heading h3 {
+  margin: 0.35rem 0 1.25rem;
+  font-size: 1.35rem;
+}
+
+.review-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.review-field {
+  display: grid;
+  gap: 0.45rem;
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.review-field-full {
+  grid-column: 1 / -1;
+}
+
+.review-field input,
+.review-field select,
+.review-field textarea {
+  width: 100%;
+  min-height: 46px;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+}
+
+.review-field textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.review-field :focus-visible {
+  outline: 3px solid rgba(255, 107, 107, 0.3);
+  outline-offset: 2px;
+}
+
+.review-form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.review-note,
+.review-status {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.review-status {
+  margin-top: 0.9rem;
+  color: var(--text);
+}
+
+.review-empty,
+.review-page-note {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.review-empty {
+  padding: 1.25rem 0;
+}
+
+.review-page-action {
+  margin: 0 0 5rem;
+}
+
+.customer-review {
+  animation: review-arrive 0.3s ease-out both;
+}
+
+@keyframes review-arrive {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .banner {
@@ -2037,6 +2141,19 @@ body.dark-mode .catalog-count strong {
   .footer-inner {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .review-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .review-field-full {
+    grid-column: auto;
+  }
+
+  .review-form-footer {
+    align-items: stretch;
+    flex-direction: column;
   }
 
   .catalog-heading {

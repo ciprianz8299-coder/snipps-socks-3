@@ -29,7 +29,7 @@
           <a href="#best">Top vânzări</a>
           <a href="socks.html">Magazin</a>
           <a href="subscriptions.html">Abonament</a>
-          <a href="#reviews">Recenzii</a>
+          <a href="reviews.html">Recenzii</a>
           <a href="faq.html">Întrebări frecvente</a>
         </nav>
 
@@ -281,7 +281,7 @@
         </div>
       </section>
 
-      <section class="container process-section" id="reviews">
+      <section class="container process-section">
         <div class="section-header">
           <h2>Cum funcționează</h2>
           <p>De la alegere la livrare, în câțiva pași simpli.</p>
@@ -306,32 +306,41 @@
         </div>
       </section>
 
-      <section class="container testimonials-section">
-        <div class="section-header">
-          <h2>Iubirea clienților</h2>
-          <p>Recenzii reale de la fani ai șosetelor.</p>
-        </div>
-
-        <div class="testimonial-grid">
-          <article class="testimonial-card">
-            <div class="stars">★★★★★</div>
-            <p>„Textura e de vis. Le-am purtat toată ziua și încă voiam mai multe.”</p>
-            <strong>— Mila R.</strong>
-          </article>
-          <article class="testimonial-card">
-            <div class="stars">★★★★★</div>
-            <p>„Culorile sunt perfecte și potrivirea e foarte plăcută.”</p>
-            <strong>— Liam T.</strong>
-          </article>
-          <article class="testimonial-card">
-            <div class="stars">★★★★★</div>
-            <p>„Le-am făcut cadou surorii mele și acum îmi iau și eu un set.”</p>
-            <strong>— Zoe K.</strong>
-          </article>
-        </div>
+      <section class="container testimonials-section" id="reviews">
+        <form class="review-form" id="review-form">
+          <div class="review-form-heading">
+            <span class="eyebrow small">Părerea ta contează</span>
+            <h3>Lasă o recenzie</h3>
+          </div>
+          <div class="review-fields">
+            <label class="review-field" for="review-name">
+              Numele tău
+              <input id="review-name" name="name" type="text" maxlength="60" autocomplete="name" required />
+            </label>
+            <label class="review-field" for="review-rating">
+              Evaluare
+              <select id="review-rating" name="rating" required>
+                <option value="5">5 stele · Excelent</option>
+                <option value="4">4 stele · Foarte bine</option>
+                <option value="3">3 stele · Bine</option>
+                <option value="2">2 stele · Acceptabil</option>
+                <option value="1">1 stea · Slab</option>
+              </select>
+            </label>
+            <label class="review-field review-field-full" for="review-comment">
+              Recenzia ta
+              <textarea id="review-comment" name="comment" rows="4" maxlength="600" required></textarea>
+            </label>
+          </div>
+          <div class="review-form-footer">
+            <p class="review-note">Recenziile trimise aici se salvează doar în acest browser și nu sunt vizibile altor clienți.</p>
+            <button class="button" type="submit">Publică recenzia</button>
+          </div>
+          <p class="review-status" id="review-status" role="status" hidden></p>
+        </form>
       </section>
 
-      <section class="container" id="reviews">
+      <section class="container">
         <div class="banner">
           <div>
             <h3>Îmbunătățește-ți confortul zilnic.</h3>
